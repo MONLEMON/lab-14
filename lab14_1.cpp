@@ -17,3 +17,28 @@ int main(){
     cout << "\nMin = " << B[5];
     return 0;
 }
+
+void stat(const double src[],int n,double dest[]){
+    double sum,max = src[0],min = src[0];
+    double mean,stand,gm,HM,sumgm = 1,sumstand = 0,sumHM = 0;
+    for(int i=0; i<n ;i++){
+        sum += src[i];
+        sumgm *= src[i];
+        sumHM += 1/src[i];
+        if(src[i]>max) max=src[i];
+        if(src[i]<min) min=src[i];
+    }
+    mean = sum/n;
+    gm = pow(sumgm,(float)1 / n);
+    HM = n/sumHM;
+    for(int i=0; i<n ;i++){
+        sumstand += pow((src[i]-mean),2);
+    }
+    stand = sqrt((sumstand/(n)));
+   dest[0] = mean;
+   dest[1] = stand;
+   dest[2] = gm;
+   dest[3] = HM;
+   dest[4] = max;
+   dest[5] = min;
+}
